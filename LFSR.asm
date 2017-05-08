@@ -1,42 +1,43 @@
-%macro _output 2		;%1=format,%2=value
-        push	%2
-        push	%1
-        call	printf
-        add	esp,8
-%endmacro
-section .text
-        global 	main
-        extern 	printf
-        LFSR_MASK	equ	0Ch 	;define LFSR MASK for  x^4+x^3+1
-        LFSR_SEED	equ	0Fh 	;define SEED
-main:
-        xor	eax,eax			;eax=0
-        xor	ebx,ebx			;ebx=0
-        mov	eax,LFSR_SEED		;eax=LFSR_SEED
+%include "asm_io.inc"
+global lfsr_nasm
 
+section   .text
+message db "OLA",0;
+lfsr_nasm:
+    mov ecx, eax ;ecx será o retorno
 
-print_loop:
-        call	shift_lfsr		;call to shif_lfsr procedure
-        ;push	eax			;save eax on stack
-        ;_output	format_out,eax		;print number
-        ;pop	eax			;get eax
-        cmp	eax,LFSR_SEED		;compare with seed
-        jne	print_loop		;continue loop
+    mov ebx, eax
+    shr ebx, 2
+    xor ecx, ebx
 
-        mov	al,1			;al=1
-        xor	ebx,ebx			;ebx=0
-        int	80h			;int 80h
+    mov ebx, eax
+    shr ebx, 3
+    xor ecx, ebx
 
-shift_lfsr:
-        mov	ebx,eax			;save eax in ebx
-        and	ebx,1			;ebx=ebx AND 1
-        shr	eax,1			;shift right eax with 1
-        cmp	ebx,1			;compare ebx with 1
-        jne	end			;if not equal, end
-        mov	ebx,LFSR_MASK		;if equal, ebx=mask and
-        xor	eax,ebx			; apply mask to eax
-end:
-        ret
+    mov ebx, eax
+    shr ebx, 5
+    xor ecx, ebx
 
-section .data
-        format_out	db	"0x%08x",10
+    mov ebx, eax
+    shr ebx, 8
+    xor ecx, ebx
+
+    mov ebx, eax
+    shr ebx, 13
+    xor ecx, ebx
+
+    mov ebx, eax
+    shr ebx, 21
+    xor ecx, ebx
+
+    and ecx, 1
+
+    shl ecx, 23
+
+    shr eax, 1
+
+    or eax, ecx
+
+    ;call print_int
+    ;call print_nl
+    ret
