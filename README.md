@@ -8,6 +8,11 @@ Outros a definir.
     sudo apt-get install gcc-multilib g++-multilib
 
 # Compilar
-Execute o makefile.
+Execute o makefile:
 
     make
+
+# Executar
+Rode o comando:
+
+    ./main

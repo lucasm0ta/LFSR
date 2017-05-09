@@ -1,0 +1,9 @@
+
+Breno Xavier Pinto      130103845
+    - Planejamento do algoritmo LFSR e desenvolvimento do algoritmo em NASM.
+
+Gabriel Naves da Silva  120011867
+    - Planejamento do algoritmo LFSR e desenvolvimento do algoritmo LFSR em C.
+
+Lucas Mota Ribeiro      120016995
+    - Unificação dos códigos, auxilio no desenvolvimento C/NASM e padronização.
