@@ -6,7 +6,7 @@
  *      Gabriel Naves da Silva  120011867
  *      Lucas Mota Ribeiro      120016995
  */
- 
+
 #include <stdint.h>
 #include <math.h>
 #include <stdio.h>
